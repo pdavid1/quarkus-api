@@ -12,19 +12,14 @@ import jakarta.ws.rs.Path;
 @Transactional
 public class BookResourse {
 
-    @Inject
-    private BookRepository repo;
-
     @GET
     public List<Book> index() {
-        return repo.listAll();
+        return Book.listAll();
     } 
 
     @POST
     public Book insert(Book insertedBook) {
-        
-        assert insertedBook.getId() == null;
-        repo.persist(insertedBook);
+        insertedBook.persist();
         return insertedBook;
 
     }
